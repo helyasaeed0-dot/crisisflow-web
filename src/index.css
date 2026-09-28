@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* CrisisFlow brand palette (from the project guidelines) */
+@theme {
+  --color-navy-950: #0B1220;
+  --color-navy-900: #111C2E;
+  --color-navy-800: #1A2740;
+  --color-navy-700: #24334F;
+  --color-accent: #18C8E8;
+  --color-critical: #E53935;
+  --color-high: #F59E0B;
+  --color-medium: #F4C430;
+  --color-success: #22C55E;
+  --color-fg: #F8FAFC;
+  --color-muted: #94A3B8;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-navy-950 text-fg font-sans antialiased;
+}
+
+/* Subtle pulse for critical map markers (no flashing) */
+@keyframes cf-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.45); }
+  70% { box-shadow: 0 0 0 12px rgba(229, 57, 53, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(229, 57, 53, 0); }
+}
+
+.cf-pulse {
+  animation: cf-pulse 2s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-pulse {
+    animation: none;
+  }
+}
+
+/* Dark theme for Leaflet popups and controls */
+.leaflet-container {
+  background: #0B1220;
+  font-family: inherit;
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #111C2E;
+  color: #F8FAFC;
+}
+.leaflet-control-attribution {
+  background: rgba(11, 18, 32, 0.8) !important;
+  color: #94A3B8 !important;
+}
+.leaflet-control-attribution a {
+  color: #18C8E8 !important;
+}
+/* Turns the light OpenStreetMap tiles into a dark map; markers are not affected */
+.cf-dark-tiles {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9) saturate(0.6);
+}
